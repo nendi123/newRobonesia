@@ -4,5 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="box_inset_layout_padding">5dp</dimen>
     <dimen name="margin_card">8dp</dimen>
+    <dimen name="margin_text">8dp</dimen>
     <dimen name="size_title">18dp</dimen>
 </resources>
