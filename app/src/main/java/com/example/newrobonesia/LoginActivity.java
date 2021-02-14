@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 RequestBody requestBody = RequestBody.create(MEDIA_TYPE, postData.toString());
                 Request request = new Request.Builder()
-                        .url(constants.BASE_URL)
+                        .url(constants.BASE_URL + "login")
                         .post(requestBody)
                         .header("Accept", "application/json")
                         .header("Content-Type", "application/json")
