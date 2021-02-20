@@ -112,16 +112,19 @@
                                     android:textAlignment="center"
                                     android:text="Bulan ini"/>
                                 <TextView
+                                    android:id="@+id/txtSakit"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textAlignment="center"
                                     android:text="Sakit : 5"/>
                                 <TextView
+                                    android:id="@+id/txtIjin"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textAlignment="center"
                                     android:text="Ijin : 1"/>
                                 <TextView
+                                    android:id="@+id/txtAlfa"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textAlignment="center"

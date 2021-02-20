@@ -73,9 +73,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
                         String mMessage = response.body().string();
-                        Log.w("Sukses", mMessage);
-                    }
+//                        Log.w("Sukses", response.body().string());
+                     }
                 });
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
