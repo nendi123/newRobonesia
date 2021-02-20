@@ -2,6 +2,8 @@ package com.example.newrobonesia;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -21,8 +23,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
     PieChart pieChart;
     Button btnProfile,btnMoitoring;
-    TextView txtIzin, txtSakit, txtAlfa;
+    TextView txtIzin, txtSakit, txtAlfa, txtName;
+    Profile profile = new Profile();
+    ImageView imageView;
+
+    StatistikKehadiran statistikKehadiran = new StatistikKehadiran();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +57,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         txtAlfa = (TextView) findViewById(R.id.txtAlfa);
         txtIzin = (TextView) findViewById(R.id.txtIjin);
         txtSakit = (TextView) findViewById(R.id.txtSakit);
+
+        txtName = (TextView) findViewById(R.id.txtName);
+        imageView = (ImageView) findViewById(R.id.imgFoto);
+
+        onLoadApp();
+        getProfile();
 
         btnProfile = (Button) findViewById(R.id.goProfile);
         btnMoitoring = (Button) findViewById(R.id.goMonitoring);
@@ -79,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        onLoadApp();
+        
     }
 
     @Override
@@ -103,12 +118,57 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    public void getProfile(){
+        Constants constants = new Constants();
+        OkHttpClient client  = new OkHttpClient();
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+        Request request = new Request.Builder()
+                .url(constants.BASE_URL+ "profil")
+                .addHeader("Authorization", "Bearer " + sessionManager.getToken())
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                String mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                String stringBody = response.body().string();
+//                Log.e("Body : ", stringBody);
+                try {
+                    JSONObject jsonBody = new JSONObject(stringBody);
+                    profile.setName(jsonBody.getString("nama"));
+                    profile.setFotoUrl(jsonBody.getString("foto_url"));
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            txtName.setText(profile.getName());
+                            imageView.setImageURI(Uri.parse(profile.getFotoUrl()));
+                        }
+                    });
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
     public void onLoadApp(){
         Constants constants = new Constants();
         OkHttpClient client  = new OkHttpClient();
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
         Request request = new Request.Builder()
                 .url(constants.BASE_URL+ "monitoring")
-                .addHeader("Authorization", "Bearer " + "5|BraINP3tF1mUDSIDBQc55OoXXmJ0WNFP3OhuTAcT")
+                .addHeader("Authorization", "Bearer " + sessionManager.getToken())
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .build();
@@ -131,6 +191,21 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject nilaiObject = new JSONObject(Jobject.getString("nilai"));
                     JSONObject kehadiranObject = new JSONObject(Jobject.getString("kehadiran"));
                     JSONObject statistikObject = new JSONObject(kehadiranObject.getString("statistik"));
+
+                    statistikKehadiran.setHadir(statistikObject.getString("hadir"));
+                    statistikKehadiran.setAlfa(statistikObject.getString("tanpa keterangan"));
+                    statistikKehadiran.setIzin(statistikObject.getString("izin"));
+                    statistikKehadiran.setSakit(statistikObject.getString("sakit"));
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            txtAlfa.setText(statistikKehadiran.getAlfa());
+                            txtSakit.setText(statistikKehadiran.getSakit());
+                            txtIzin.setText(statistikKehadiran.getIzin());
+                        }
+                    });
+
 
                     ArrayList<PieEntry> yValues = new ArrayList<>();
                     yValues.add(new PieEntry(Float.parseFloat(nilaiObject.getString("DIY")), "DIY"));

@@ -46,6 +46,14 @@
         android:hint="password"
         android:inputType="textPassword" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:textColor="@color/colorRed"
+        android:text="Email atau Password salah !!" />
+
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
