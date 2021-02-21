@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     PieChart pieChart;
     Button btnProfile,btnMoitoring;
-    TextView txtIzin, txtSakit, txtAlfa, txtName;
+    TextView txtIzin, txtSakit, txtAlfa, txtName, txtNis;
     Profile profile = new Profile();
     ImageView imageView;
 
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         txtSakit = (TextView) findViewById(R.id.txtSakit);
 
         txtName = (TextView) findViewById(R.id.txtName);
+        txtNis = (TextView) findViewById(R.id.txtNIS);
         imageView = (ImageView) findViewById(R.id.imgFoto);
 
         onLoadApp();
@@ -143,13 +144,20 @@ public class MainActivity extends AppCompatActivity {
 //                Log.e("Body : ", stringBody);
                 try {
                     JSONObject jsonBody = new JSONObject(stringBody);
+                    JSONObject jsonSiswa = new JSONObject(jsonBody.getString("siswa"));
+                    JSONObject jsonSekolah = new JSONObject(jsonSiswa.getString("sekolah"));
+
                     profile.setName(jsonBody.getString("nama"));
-                    profile.setFotoUrl(jsonBody.getString("foto_url"));
+                    String url_foto = jsonBody.getString("foto_url").replace(" ","%20");
+                    profile.setFotoUrl(url_foto);
+                    profile.setNis(jsonSiswa.getString("nis"));
+                    profile.setSekolah(jsonSekolah.getString("nama"));
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             txtName.setText(profile.getName());
+                            txtNis.setText(profile.getNis() + " - " + profile.getSekolah());
                             imageView.setImageURI(Uri.parse(profile.getFotoUrl()));
                         }
                     });
@@ -200,9 +208,9 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            txtAlfa.setText(statistikKehadiran.getAlfa());
-                            txtSakit.setText(statistikKehadiran.getSakit());
-                            txtIzin.setText(statistikKehadiran.getIzin());
+                            txtAlfa.setText("Alfa : "+statistikKehadiran.getAlfa());
+                            txtSakit.setText("Sakit : "+statistikKehadiran.getSakit());
+                            txtIzin.setText("Izin : "+statistikKehadiran.getIzin());
                         }
                     });
 

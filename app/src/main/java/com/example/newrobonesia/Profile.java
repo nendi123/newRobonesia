@@ -1,14 +1,22 @@
 package com.example.newrobonesia;
 
 public class Profile {
-    private String name, fotoUrl, nis;
+    private String name, fotoUrl, nis, sekolah;
 
     public Profile(){
         this.name = "";
         this.fotoUrl = "";
         this.nis = "";
+        this.sekolah ="";
     }
 
+    public String getSekolah() {
+        return sekolah;
+    }
+
+    public void setSekolah(String sekolah) {
+        this.sekolah = sekolah;
+    }
 
     public String getName() {
         return name;
