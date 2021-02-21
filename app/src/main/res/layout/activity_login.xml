@@ -53,11 +53,12 @@
         android:id="@+id/txtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/textView3"

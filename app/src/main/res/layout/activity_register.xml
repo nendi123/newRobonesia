@@ -37,6 +37,7 @@
         android:ems="10"
         android:hint="Masukkan Nama Siswa"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
     <TextView
@@ -58,6 +59,7 @@
         android:ems="10"
         android:hint="Masukkan No. Induk"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
     <TextView
@@ -79,6 +81,7 @@
         android:ems="10"
         android:hint="SD ABC 1"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
     <TextView
@@ -100,6 +103,7 @@
         android:ems="10"
         android:hint="yourmail@mail.com"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
     <TextView
@@ -121,6 +125,7 @@
         android:ems="10"
         android:hint="0823xxxxxxx"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
     <TextView
@@ -142,6 +147,7 @@
         android:ems="10"
         android:hint="Type-Password"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
     <Button
