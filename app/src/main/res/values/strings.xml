@@ -12,8 +12,8 @@
     <string name="nama_siswa">Nama Siswa</string>
     <string name="no_induk_siswa">No Induk Siswa</string>
     <string name="sekolah">Sekolah</string>
-    <string name="email_orang_tua">Email Orang Tua</string>
-    <string name="no_hp_orang_tua">No. Hp Orang Tua</string>
+    <string name="email_orang_tua">Email</string>
+    <string name="no_hp_orang_tua">No. Handphone</string>
     <string name="daftar">Daftar</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>

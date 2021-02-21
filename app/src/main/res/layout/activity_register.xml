@@ -7,102 +7,148 @@
     android:padding="@dimen/box_inset_layout_padding"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="250dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_logo" />
+        android:src="@drawable/ic_logo"
+        android:layout_marginBottom="3mm"/>
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/nama_siswa" />
+        android:text="@string/nama_siswa"
+        android:textColor="@color/colorWhite"
+        android:textSize="17dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginLeft="11dp"/>
 
     <EditText
         android:id="@+id/editPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
         android:ems="10"
+        android:hint="Masukkan Nama Siswa"
         android:inputType="textPersonName"
-        android:hint="Jhon Doe" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_induk_siswa" />
+        android:text="@string/no_induk_siswa"
+        android:textColor="@color/colorWhite"
+        android:textSize="17dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginLeft="11dp"/>
 
     <EditText
         android:id="@+id/editNis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
         android:ems="10"
+        android:hint="Masukkan No. Induk"
         android:inputType="textPersonName"
-        android:hint="1231221312" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sekolah" />
+        android:text="@string/sekolah"
+        android:textColor="@color/colorWhite"
+        android:layout_marginRight="11dp"
+        android:layout_marginLeft="11dp"
+        android:textSize="17dp"/>
 
     <EditText
         android:id="@+id/editSchool"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
         android:ems="10"
+        android:hint="SD ABC 1"
         android:inputType="textPersonName"
-        android:hint="SD ABC 1" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/email_orang_tua" />
+        android:text="@string/email_orang_tua"
+        android:textColor="@color/colorWhite"
+        android:layout_marginRight="11dp"
+        android:layout_marginLeft="11dp"
+        android:textSize="17dp"/>
 
     <EditText
         android:id="@+id/editEmails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
         android:ems="10"
+        android:hint="yourmail@mail.com"
         android:inputType="textPersonName"
-        android:hint="yourmail@mail.com" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_hp_orang_tua" />
+        android:text="@string/no_hp_orang_tua"
+        android:textColor="@color/colorWhite"
+        android:layout_marginRight="11dp"
+        android:layout_marginLeft="11dp"
+        android:textSize="17dp"/>
 
     <EditText
         android:id="@+id/editPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
         android:ems="10"
+        android:hint="0823xxxxxxx"
         android:inputType="textPersonName"
-        android:hint="0823xxxxx" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/password" />
+        android:text="@string/password"
+        android:textColor="@color/colorWhite"
+        android:layout_marginRight="11dp"
+        android:layout_marginLeft="11dp"
+        android:textSize="17dp"/>
 
     <EditText
         android:id="@+id/editPasswords"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
         android:ems="10"
+        android:hint="Type-Password"
         android:inputType="textPersonName"
-        android:hint="Type-Password" />
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/daftar" />
+        android:text="@string/daftar"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"/>
 </LinearLayout>
