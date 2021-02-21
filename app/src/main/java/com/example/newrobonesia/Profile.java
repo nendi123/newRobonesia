@@ -1,17 +1,35 @@
 package com.example.newrobonesia;
 
 public class Profile {
-    private String name, fotoUrl, nis, sekolah;
+    private String name, fotoUrl, nis, sekolah, kelas, alamat;
 
     public Profile(){
         this.name = "";
         this.fotoUrl = "";
         this.nis = "";
         this.sekolah ="";
+        this.kelas ="";
+        this.alamat ="";
     }
 
     public String getSekolah() {
         return sekolah;
+    }
+
+    public String getKelas() {
+        return kelas;
+    }
+
+    public void setKelas(String kelas) {
+        this.kelas = kelas;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
     }
 
     public void setSekolah(String sekolah) {

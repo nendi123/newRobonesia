@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         txtNis = (TextView) findViewById(R.id.txtNIS);
         imageView = (ImageView) findViewById(R.id.imgFoto);
 
-        onLoadApp();
         getProfile();
 
         btnProfile = (Button) findViewById(R.id.goProfile);
@@ -87,15 +86,84 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Constants constants = new Constants();
+        OkHttpClient client  = new OkHttpClient();
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+        Request request = new Request.Builder()
+                .url(constants.BASE_URL+ "monitoring")
+                .addHeader("Authorization", "Bearer " + sessionManager.getToken())
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onFailure(Call call, IOException e) {
+                String mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                //call.cancel();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                String jsonData = response.body().string();
+
+                JSONObject Jobject = null;
+                try {
+                    Jobject = new JSONObject(jsonData);
+                    JSONObject nilaiObject = new JSONObject(Jobject.getString("nilai"));
+                    JSONObject kehadiranObject = new JSONObject(Jobject.getString("kehadiran"));
+                    JSONObject statistikObject = new JSONObject(kehadiranObject.getString("statistik"));
+
+                    statistikKehadiran.setHadir(statistikObject.getString("hadir"));
+                    statistikKehadiran.setAlfa(statistikObject.getString("tanpa keterangan"));
+                    statistikKehadiran.setIzin(statistikObject.getString("izin"));
+                    statistikKehadiran.setSakit(statistikObject.getString("sakit"));
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            txtAlfa.setText("Alfa : "+statistikKehadiran.getAlfa());
+                            txtSakit.setText("Sakit : "+statistikKehadiran.getSakit());
+                            txtIzin.setText("Izin : "+statistikKehadiran.getIzin());
+                        }
+                    });
+
+
+                    ArrayList<PieEntry> yValues = new ArrayList<>();
+                    yValues.add(new PieEntry(Float.parseFloat(nilaiObject.getString("DIY")), "DIY"));
+                    yValues.add(new PieEntry(Float.parseFloat(nilaiObject.getString("Lego")), "Lego"));
+                    yValues.add(new PieEntry(Float.parseFloat(nilaiObject.getString("Animasi")), "Animasi"));
+
+                    pieChart = (PieChart) findViewById(R.id.pieChart);
+                    pieChart.setUsePercentValues(true);
+                    pieChart.getDescription().setEnabled(false);
+                    pieChart.setExtraOffsets(5,10,5,5);
+
+                    pieChart.setDragDecelerationEnabled(true);
+
+                    pieChart.setDrawHoleEnabled(true);
+                    pieChart.setHoleColor(Color.WHITE);
+                    pieChart.setTransparentCircleRadius(61f);
+
+
+                    PieDataSet dataSet = new PieDataSet(yValues,"Program");
+                    dataSet.setSliceSpace(3f);
+                    dataSet.setSelectionShift(5f);
+                    dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+                    PieData pieData = new PieData((dataSet));
+                    pieData.setValueTextSize(10f);
+                    pieData.setValueTextColor(Color.GREEN);
+
+                    pieChart.setData(pieData);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
-        
     }
 
     @Override
@@ -171,83 +239,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void onLoadApp(){
-        Constants constants = new Constants();
-        OkHttpClient client  = new OkHttpClient();
-        SessionManager sessionManager = new SessionManager(getApplicationContext());
-        Request request = new Request.Builder()
-                .url(constants.BASE_URL+ "monitoring")
-                .addHeader("Authorization", "Bearer " + sessionManager.getToken())
-                .header("Accept", "application/json")
-                .header("Content-Type", "application/json")
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                String mMessage = e.getMessage().toString();
-                Log.w("failure Response", mMessage);
-                //call.cancel();
-            }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-                String jsonData = response.body().string();
-
-                JSONObject Jobject = null;
-                try {
-                    Jobject = new JSONObject(jsonData);
-                    JSONObject nilaiObject = new JSONObject(Jobject.getString("nilai"));
-                    JSONObject kehadiranObject = new JSONObject(Jobject.getString("kehadiran"));
-                    JSONObject statistikObject = new JSONObject(kehadiranObject.getString("statistik"));
-
-                    statistikKehadiran.setHadir(statistikObject.getString("hadir"));
-                    statistikKehadiran.setAlfa(statistikObject.getString("tanpa keterangan"));
-                    statistikKehadiran.setIzin(statistikObject.getString("izin"));
-                    statistikKehadiran.setSakit(statistikObject.getString("sakit"));
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            txtAlfa.setText("Alfa : "+statistikKehadiran.getAlfa());
-                            txtSakit.setText("Sakit : "+statistikKehadiran.getSakit());
-                            txtIzin.setText("Izin : "+statistikKehadiran.getIzin());
-                        }
-                    });
-
-
-                    ArrayList<PieEntry> yValues = new ArrayList<>();
-                    yValues.add(new PieEntry(Float.parseFloat(nilaiObject.getString("DIY")), "DIY"));
-                    yValues.add(new PieEntry(Float.parseFloat(nilaiObject.getString("Lego")), "Lego"));
-                    yValues.add(new PieEntry(Float.parseFloat(nilaiObject.getString("Animasi")), "Animasi"));
-
-                    pieChart = (PieChart) findViewById(R.id.pieChart);
-                    pieChart.setUsePercentValues(true);
-                    pieChart.getDescription().setEnabled(false);
-                    pieChart.setExtraOffsets(5,10,5,5);
-
-                    pieChart.setDragDecelerationEnabled(true);
-
-                    pieChart.setDrawHoleEnabled(true);
-                    pieChart.setHoleColor(Color.WHITE);
-                    pieChart.setTransparentCircleRadius(61f);
-
-
-                    PieDataSet dataSet = new PieDataSet(yValues,"Program");
-                    dataSet.setSliceSpace(3f);
-                    dataSet.setSelectionShift(5f);
-                    dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
-
-                    PieData pieData = new PieData((dataSet));
-                    pieData.setValueTextSize(10f);
-                    pieData.setValueTextColor(Color.GREEN);
-
-                    pieChart.setData(pieData);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
     }
 }

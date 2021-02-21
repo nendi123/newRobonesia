@@ -15,7 +15,7 @@
         android:src="@drawable/ic_pic"/>
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/txtProfName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -23,7 +23,7 @@
         android:text="Jhon Doe" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/txtProfNis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -53,17 +53,17 @@
                     />
 
                 <TextView
-                    android:id="@+id/titleNIS"
+                    android:id="@+id/titleNama"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/imgNIS"
                     android:text="Nama Siswa" />
 
                 <TextView
-                    android:id="@+id/valNIS"
+                    android:id="@+id/valNama"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/titleNIS"
+                    android:layout_below="@id/titleNama"
                     android:layout_toRightOf="@id/imgNIS"
                     android:text="TextView" />
             </RelativeLayout>
@@ -81,17 +81,17 @@
                     />
 
                 <TextView
-                    android:id="@+id/titleNama"
+                    android:id="@+id/titleNis"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/imgNama"
                     android:text="NIS" />
 
                 <TextView
-                    android:id="@+id/valNama"
+                    android:id="@+id/valNis"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/titleNama"
+                    android:layout_below="@id/titleNis"
                     android:layout_toRightOf="@id/imgNama"
                     android:text="TextView" />
             </RelativeLayout>
@@ -144,7 +144,7 @@
                     android:text="Alamat" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/valAlamat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/titleAlamat"
