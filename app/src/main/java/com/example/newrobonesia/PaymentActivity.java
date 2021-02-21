@@ -51,22 +51,25 @@ public class PaymentActivity extends AppCompatActivity {
                         .addHeader("Content-Type", "application/json")
                         .addHeader("Authorization", "Basic U0ItTWlkLXNlcnZlci1ZanBCTVVPWUo3MmdYNC0wMUVFeU10THQ6")
                         .build();
-                try {
-                    final Response response = client.newCall(request).execute();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        String mMessage = e.getMessage().toString();
+                        Log.e("failure Response", mMessage);
+                    }
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                txtResponse.setText(response.body().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        final String jsonData = response.body().string();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                txtResponse.setText(jsonData);
                             }
-                        }
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                        });
+
+                    }
+                });
             }
         });
     }

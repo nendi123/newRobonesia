@@ -43,7 +43,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     PieChart pieChart;
-    Button btnProfile,btnMoitoring;
+    Button btnProfile,btnMoitoring,btnPembayaran;
     TextView txtIzin, txtSakit, txtAlfa, txtName, txtNis;
     Profile profile = new Profile();
     ImageView imageView;
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnProfile = (Button) findViewById(R.id.goProfile);
         btnMoitoring = (Button) findViewById(R.id.goMonitoring);
+        btnPembayaran = (Button) findViewById(R.id.btnPembayaran);
 
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +83,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(MainActivity.this, MonitoringActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnPembayaran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(MainActivity.this, PaymentActivity.class);
                 startActivity(intent);
             }
         });
