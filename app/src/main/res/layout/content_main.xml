@@ -168,21 +168,26 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Pembayaran"/>
+                    android:layout_weight="1"
+                    android:text="Pembayaran"
+                    android:textSize="13sp" />
+
                 <Button
                     android:id="@+id/goMonitoring"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Monitoring"/>
+                    android:layout_weight="1"
+                    android:text="Monitoring"
+                    android:textSize="13sp" />
+
                 <Button
                     android:id="@+id/goProfile"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Profile"/>
+                    android:layout_weight="1"
+                    android:text="Profile"
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
